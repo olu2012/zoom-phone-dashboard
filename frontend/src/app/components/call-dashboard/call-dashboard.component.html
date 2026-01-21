@@ -1,0 +1,69 @@
+<div class="dashboard-container" [class.theme-tank]="currentTheme === 'tank'" [class.theme-roc]="currentTheme === 'roc'">
+  <div class="header">
+    <h1>Call Time Dashboard</h1>
+    <div class="controls">
+      <!-- Date Range Selector -->
+      <select class="date-range-filter" [(ngModel)]="selectedDateRange" (ngModelChange)="onDateRangeChange()" [disabled]="loading">
+        <option value="today">Today</option>
+        <option value="last7days">Last 7 Days</option>
+        <option value="last30days">Last 30 Days</option>
+      </select>
+
+      <!-- Site Selector -->
+      <select class="site-filter" [(ngModel)]="selectedSite" (ngModelChange)="onSiteChange()" [disabled]="loading">
+        <option value="">All Sites</option>
+        <option *ngFor="let site of sites" [value]="site.name">
+          {{ site.name }}
+        </option>
+      </select>
+      
+      <!-- Refresh Button -->
+      <button class="refresh-btn" (click)="refresh()" [disabled]="loading">
+        {{ loading ? 'Loading...' : 'Refresh' }}
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div class="info-bar">
+    <div *ngIf="dateRange" class="date-range">
+      📅 {{ dateRange.from }} to {{ dateRange.to }}
+    </div>
+    <div class="site-info">
+      📍 {{ currentSite }}
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="call-stats-table">
+      <thead>
+        <tr class="table-header">
+          <th>Name</th>
+          <th>Total Calls</th>
+          <th>Outbound</th>
+          <th>Total Call Time</th>
+          <th>Total Call Time (Out)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="loading">
+          <td colspan="5" class="loading-cell">Loading call statistics...</td>
+        </tr>
+        <tr *ngIf="!loading && callStats.length === 0">
+          <td colspan="5" class="no-data-cell">No call data available</td>
+        </tr>
+        <tr *ngFor="let stat of callStats" 
+            [class.three-hours-reached]="hasReachedThreeHours(stat.totalOutboundCallTimeSeconds)">
+          <td class="user-cell">{{ stat.user }}</td>
+          <td>{{ stat.totalCalls }}</td>
+          <td>{{ stat.outbound }}</td>
+          <td>{{ stat.totalCallTime }}</td>
+          <td class="outbound-time-cell">{{ stat.totalOutboundCallTime }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
