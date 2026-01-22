@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Phone Dashboard - Installation Guide</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            line-height: 1.6;
+            color: #333;
+        }
+        h1 {
+            color: #2D8CFF;
+            border-bottom: 3px solid #2D8CFF;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #1a5fb4;
+            margin-top: 30px;
+            border-left: 4px solid #2D8CFF;
+            padding-left: 15px;
+        }
+        h3 {
+            color: #444;
+            margin-top: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        pre {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .important {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .success {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #2D8CFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #2D8CFF;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .toc {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .toc ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        .toc a {
+            color: #1a5fb4;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        @media print {
+            body {
+                padding: 20px;
+            }
+            h2 {
+                page-break-before: auto;
+            }
+            pre {
+                white-space: pre-wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Zoom Phone Dashboard - Installation Guide</h1>
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ul>
+            <li><a href="#prerequisites">1. Prerequisites</a></li>
+            <li><a href="#nodejs">2. Installing Node.js</a></li>
+            <li><a href="#extract">3. Extracting Application Files</a></li>
+            <li><a href="#backend">4. Backend Setup</a></li>
+            <li><a href="#frontend">5. Frontend Setup</a></li>
+            <li><a href="#iis">6. IIS Configuration (Production)</a></li>
+            <li><a href="#running">7. Running the Application</a></li>
+            <li><a href="#troubleshooting">8. Troubleshooting</a></li>
+        </ul>
+    </div>
+
+    <h2 id="prerequisites">1. Prerequisites</h2>
+
+    <h3>System Requirements</h3>
+    <table>
+        <tr>
+            <th>Component</th>
+            <th>Requirement</th>
+        </tr>
+        <tr>
+            <td>Operating System</td>
+            <td>Windows 10/11 or Windows Server 2016+</td>
+        </tr>
+        <tr>
+            <td>RAM</td>
+            <td>Minimum 4GB (8GB recommended)</td>
+        </tr>
+        <tr>
+            <td>Disk Space</td>
+            <td>500MB minimum</td>
+        </tr>
+        <tr>
+            <td>Node.js</td>
+            <td>Version 18.x or higher (LTS recommended)</td>
+        </tr>
+        <tr>
+            <td>Network</td>
+            <td>Internet access for Zoom API calls</td>
+        </tr>
+    </table>
+
+    <h3>Required Software</h3>
+    <ul>
+        <li><strong>Node.js</strong> - Required to run the backend server</li>
+        <li><strong>IIS</strong> - Optional, for production deployment of frontend</li>
+        <li><strong>Web Browser</strong> - Chrome, Edge, or Firefox (latest version)</li>
+    </ul>
+
+    <h2 id="nodejs">2. Installing Node.js</h2>
+
+    <p><span class="step-number">1</span><strong>Download Node.js</strong></p>
+    <p>Visit the official Node.js website: <a href="https://nodejs.org">https://nodejs.org</a></p>
+    <p>Download the <strong>LTS (Long Term Support)</strong> version for Windows.</p>
+
+    <p><span class="step-number">2</span><strong>Run the Installer</strong></p>
+    <ul>
+        <li>Double-click the downloaded <code>.msi</code> file</li>
+        <li>Click "Next" to proceed through the installation wizard</li>
+        <li>Accept the license agreement</li>
+        <li>Use the default installation path (or choose your preferred location)</li>
+        <li>Ensure "Add to PATH" is checked</li>
+        <li>Click "Install" and wait for completion</li>
+    </ul>
+
+    <p><span class="step-number">3</span><strong>Verify Installation</strong></p>
+    <p>Open Command Prompt (cmd) and run:</p>
+    <pre>node --version
+npm --version</pre>
+    <p>You should see version numbers displayed (e.g., v18.17.0 and 9.6.7).</p>
+
+    <div class="success">
+        <strong>Success:</strong> If both commands display version numbers, Node.js is installed correctly.
+    </div>
+
+    <h2 id="extract">3. Extracting Application Files</h2>
+
+    <p><span class="step-number">1</span><strong>Extract the ZIP file</strong></p>
+    <p>Extract the provided <code>zoom-phone-dashboard.zip</code> to your desired location, for example:</p>
+    <pre>C:\Applications\zoom-phone-dashboard</pre>
+
+    <p><span class="step-number">2</span><strong>Verify folder structure</strong></p>
+    <p>After extraction, you should see the following structure:</p>
+    <pre>zoom-phone-dashboard/
+    ├── backend/
+    │   ├── server.js
+    │   ├── package.json
+    │   └── .env
+    └── frontend/
+        ├── src/
+        ├── package.json
+        └── angular.json</pre>
+
+    <h2 id="backend">4. Backend Setup</h2>
+
+    <p><span class="step-number">1</span><strong>Navigate to the backend folder</strong></p>
+    <p>Open Command Prompt and navigate to the backend directory:</p>
+    <pre>cd C:\Applications\zoom-phone-dashboard\backend</pre>
+
+    <p><span class="step-number">2</span><strong>Install dependencies</strong></p>
+    <pre>npm install</pre>
+    <p>This will install all required Node.js packages (express, axios, cors, dotenv).</p>
+
+    <p><span class="step-number">3</span><strong>Configure Environment Variables</strong></p>
+    <p>Open the <code>.env</code> file in the backend folder and configure your Zoom API credentials:</p>
+    <pre># Zoom API Credentials (obtain from Zoom Marketplace)
+ZOOM_ACCOUNT_ID=your_account_id_here
+ZOOM_CLIENT_ID=your_client_id_here
+ZOOM_CLIENT_SECRET=your_client_secret_here
+
+# Server Configuration
+PORT=3000
+
+# Environment
+NODE_ENV=production</pre>
+
+    <div class="important">
+        <strong>Important:</strong> Replace the placeholder values with your actual Zoom API credentials. These can be obtained from the Zoom App Marketplace by creating a Server-to-Server OAuth app.
+    </div>
+
+    <h3>Obtaining Zoom API Credentials</h3>
+    <ol>
+        <li>Go to <a href="https://marketplace.zoom.us">https://marketplace.zoom.us</a></li>
+        <li>Sign in with your Zoom account</li>
+        <li>Click "Develop" > "Build App"</li>
+        <li>Choose "Server-to-Server OAuth"</li>
+        <li>Fill in the required information</li>
+        <li>Copy the Account ID, Client ID, and Client Secret</li>
+        <li>Add the required scopes: <code>phone:read:admin</code>, <code>phone:read:call_log:admin</code></li>
+    </ol>
+
+    <h2 id="frontend">5. Frontend Setup</h2>
+
+    <p><span class="step-number">1</span><strong>Navigate to the frontend folder</strong></p>
+    <pre>cd C:\Applications\zoom-phone-dashboard\frontend</pre>
+
+    <p><span class="step-number">2</span><strong>Install dependencies</strong></p>
+    <pre>npm install</pre>
+    <p>This may take a few minutes as it downloads Angular and all dependencies.</p>
+
+    <p><span class="step-number">3</span><strong>Configure API URL (if needed)</strong></p>
+    <p>If your backend runs on a different server or port, update the environment file:</p>
+    <p>Edit <code>src/environments/environment.prod.ts</code>:</p>
+    <pre>export const environment = {
+  production: true,
+  apiUrl: 'http://YOUR_SERVER_IP:3000/api'
+};</pre>
+
+    <p><span class="step-number">4</span><strong>Build for Production</strong></p>
+    <pre>npm run build</pre>
+    <p>This creates a <code>dist/zoom-phone-dashboard</code> folder with the compiled application.</p>
+
+    <h2 id="iis">6. IIS Configuration (Production)</h2>
+
+    <div class="note">
+        <strong>Note:</strong> IIS is optional. For simple deployments, you can run both frontend and backend using Node.js. IIS is recommended for production environments where you need better performance and management.
+    </div>
+
+    <h3>Option A: Using IIS (Recommended for Production)</h3>
+
+    <p><span class="step-number">1</span><strong>Enable IIS on Windows</strong></p>
+    <ul>
+        <li>Open Control Panel > Programs > Turn Windows features on or off</li>
+        <li>Check "Internet Information Services"</li>
+        <li>Expand and also check:
+            <ul>
+                <li>Web Management Tools > IIS Management Console</li>
+                <li>World Wide Web Services > Common HTTP Features (all)</li>
+                <li>World Wide Web Services > Application Development Features > .NET Extensibility, ASP.NET</li>
+            </ul>
+        </li>
+        <li>Click OK and wait for installation</li>
+    </ul>
+
+    <p><span class="step-number">2</span><strong>Install URL Rewrite Module</strong></p>
+    <p>Download and install from: <a href="https://www.iis.net/downloads/microsoft/url-rewrite">https://www.iis.net/downloads/microsoft/url-rewrite</a></p>
+
+    <p><span class="step-number">3</span><strong>Create IIS Website</strong></p>
+    <ol>
+        <li>Open IIS Manager (search "IIS" in Start menu)</li>
+        <li>Right-click "Sites" > "Add Website"</li>
+        <li>Configure:
+            <ul>
+                <li>Site name: <code>ZoomPhoneDashboard</code></li>
+                <li>Physical path: <code>C:\Applications\zoom-phone-dashboard\frontend\dist\zoom-phone-dashboard</code></li>
+                <li>Port: <code>80</code> (or your preferred port)</li>
+            </ul>
+        </li>
+        <li>Click OK</li>
+    </ol>
+
+    <p><span class="step-number">4</span><strong>Add URL Rewrite Rule</strong></p>
+    <p>Create a <code>web.config</code> file in the dist folder:</p>
+    <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;configuration&gt;
+  &lt;system.webServer&gt;
+    &lt;rewrite&gt;
+      &lt;rules&gt;
+        &lt;rule name="Angular Routes" stopProcessing="true"&gt;
+          &lt;match url=".*" /&gt;
+          &lt;conditions logicalGrouping="MatchAll"&gt;
+            &lt;add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" /&gt;
+            &lt;add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" /&gt;
+          &lt;/conditions&gt;
+          &lt;action type="Rewrite" url="/index.html" /&gt;
+        &lt;/rule&gt;
+      &lt;/rules&gt;
+    &lt;/rewrite&gt;
+    &lt;staticContent&gt;
+      &lt;mimeMap fileExtension=".json" mimeType="application/json" /&gt;
+    &lt;/staticContent&gt;
+  &lt;/system.webServer&gt;
+&lt;/configuration&gt;</pre>
+
+    <h3>Option B: Without IIS (Development/Simple Setup)</h3>
+    <p>You can serve the frontend using a simple Node.js static server or use Angular's development server:</p>
+    <pre>cd C:\Applications\zoom-phone-dashboard\frontend
+npm start</pre>
+    <p>This will serve the frontend at <code>http://localhost:4200</code></p>
+
+    <h2 id="running">7. Running the Application</h2>
+
+    <h3>Starting the Backend Server</h3>
+    <p>Open Command Prompt and run:</p>
+    <pre>cd C:\Applications\zoom-phone-dashboard\backend
+npm start</pre>
+    <p>You should see: <code>Server running on port 3000</code></p>
+
+    <div class="note">
+        <strong>Tip:</strong> To run the backend as a Windows service (auto-start on boot), consider using tools like <strong>PM2</strong> or <strong>NSSM</strong>.
+    </div>
+
+    <h3>Installing PM2 for Production (Recommended)</h3>
+    <pre>npm install -g pm2
+cd C:\Applications\zoom-phone-dashboard\backend
+pm2 start server.js --name "zoom-dashboard-api"
+pm2 save
+pm2 startup</pre>
+
+    <h3>Starting the Frontend</h3>
+    <p><strong>If using IIS:</strong> The frontend is automatically served. Access via <code>http://localhost</code> or your configured port.</p>
+    <p><strong>If not using IIS:</strong></p>
+    <pre>cd C:\Applications\zoom-phone-dashboard\frontend
+npm start</pre>
+
+    <h3>Accessing the Dashboard</h3>
+    <table>
+        <tr>
+            <th>Setup Type</th>
+            <th>Frontend URL</th>
+            <th>Backend URL</th>
+        </tr>
+        <tr>
+            <td>Development</td>
+            <td>http://localhost:4200</td>
+            <td>http://localhost:3000</td>
+        </tr>
+        <tr>
+            <td>IIS Production</td>
+            <td>http://localhost (or configured port)</td>
+            <td>http://localhost:3000</td>
+        </tr>
+    </table>
+
+    <h2 id="troubleshooting">8. Troubleshooting</h2>
+
+    <h3>Common Issues</h3>
+
+    <table>
+        <tr>
+            <th>Problem</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>"node" is not recognized</td>
+            <td>Restart Command Prompt after Node.js installation, or reinstall Node.js ensuring "Add to PATH" is checked</td>
+        </tr>
+        <tr>
+            <td>npm install fails</td>
+            <td>Run Command Prompt as Administrator, check internet connection</td>
+        </tr>
+        <tr>
+            <td>Backend won't start</td>
+            <td>Check if port 3000 is already in use. Change PORT in .env file if needed</td>
+        </tr>
+        <tr>
+            <td>Cannot connect to API</td>
+            <td>Verify backend is running, check firewall settings, verify API URL in environment.ts</td>
+        </tr>
+        <tr>
+            <td>Zoom API errors</td>
+            <td>Verify API credentials in .env file, ensure OAuth app has correct scopes</td>
+        </tr>
+        <tr>
+            <td>IIS 404 errors</td>
+            <td>Install URL Rewrite module, add web.config file</td>
+        </tr>
+        <tr>
+            <td>CORS errors in browser</td>
+            <td>Ensure backend is running and CORS is configured correctly</td>
+        </tr>
+    </table>
+
+    <h3>Checking Logs</h3>
+    <p>Backend logs are displayed in the Command Prompt window where the server is running.</p>
+    <p>For PM2 logs:</p>
+    <pre>pm2 logs zoom-dashboard-api</pre>
+
+    <h3>Firewall Configuration</h3>
+    <p>If accessing from other computers on the network, ensure these ports are open:</p>
+    <ul>
+        <li>Port 3000 (Backend API)</li>
+        <li>Port 80 or 4200 (Frontend, depending on setup)</li>
+    </ul>
+
+    <div class="success">
+        <strong>Support:</strong> For additional assistance, please contact your system administrator or the development team.
+    </div>
+
+    <hr style="margin-top: 40px;">
+    <p style="text-align: center; color: #666; font-size: 12px;">
+        Zoom Phone Dashboard Installation Guide | Version 1.0
+    </p>
+</body>
+</html>

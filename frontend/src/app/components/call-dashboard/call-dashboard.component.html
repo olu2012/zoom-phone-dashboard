@@ -3,11 +3,13 @@
     <h1>Call Time Dashboard</h1>
     <div class="controls">
       <!-- Date Range Selector -->
+       <!--Date removed
+
+
       <select class="date-range-filter" [(ngModel)]="selectedDateRange" (ngModelChange)="onDateRangeChange()" [disabled]="loading">
         <option value="today">Today</option>
-        <option value="last7days">Last 7 Days</option>
-        <option value="last30days">Last 30 Days</option>
       </select>
+      -->
 
       <!-- Site Selector -->
       <select class="site-filter" [(ngModel)]="selectedSite" (ngModelChange)="onSiteChange()" [disabled]="loading">
@@ -17,10 +19,6 @@
         </option>
       </select>
       
-      <!-- Refresh Button -->
-      <button class="refresh-btn" (click)="refresh()" [disabled]="loading">
-        {{ loading ? 'Loading...' : 'Refresh' }}
-      </button>
     </div>
   </div>
 

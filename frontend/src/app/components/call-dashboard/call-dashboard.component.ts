@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CallStats, Site } from '../../models/call-stats.model';
 import { CallStatsService } from '../../services/call-stats.service';
 
@@ -7,7 +7,8 @@ import { CallStatsService } from '../../services/call-stats.service';
   templateUrl: './call-dashboard.component.html',
   styleUrls: ['./call-dashboard.component.css']
 })
-export class CallDashboardComponent implements OnInit {
+export class CallDashboardComponent implements OnInit, OnDestroy {
+  private refreshInterval: any;
   callStats: CallStats[] = [];
   sites: Site[] = [];
   selectedSite: string = '';
@@ -26,6 +27,18 @@ export class CallDashboardComponent implements OnInit {
     console.log('ngOnInit called');
     this.loadSites();
     this.loadCallStats();
+
+    // Auto-refresh every 5 minutes (300,000 ms)
+    this.refreshInterval = setInterval(() => {
+      console.log('Auto-refreshing data...');
+      this.refresh();
+    }, 300000);
+  }
+
+  ngOnDestroy(): void {
+    if (this.refreshInterval) {
+      clearInterval(this.refreshInterval);
+    }
   }
 
   loadSites(): void {

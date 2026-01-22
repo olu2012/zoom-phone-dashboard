@@ -194,12 +194,13 @@
 }
 
 .three-hours-reached td {
-  color: #333;
+  background-color: #4CAF50 !important;
+  color: #fff;
   font-weight: 500;
 }
 
-.three-hours-reached:hover {
-  background-color: #a5c272 !important;
+.three-hours-reached:hover td {
+  background-color: #45a049 !important;
 }
 
 .loading-cell, .no-data-cell {
