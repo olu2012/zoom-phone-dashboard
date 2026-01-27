@@ -209,9 +209,8 @@
 
 .call-stats-table td {
   padding: 12px 15px;
-  color: #333;
-  background-color: #2D2D2D;
-  color: white;
+  background-color: white;
+  color: #000;
 }
 
 .user-cell {
@@ -229,7 +228,7 @@
 
 .three-hours-reached td {
   background-color: #4CAF50 !important;
-  color: #fff;
+  color: #000;
   font-weight: 500;
 }
 
