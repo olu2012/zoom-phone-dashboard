@@ -199,7 +199,7 @@
 }
 
 .call-stats-table tbody tr {
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #000;
   transition: background-color 0.2s;
 }
 
