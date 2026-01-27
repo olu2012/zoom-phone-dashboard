@@ -15,7 +15,7 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
   private scrollDirection: 'down' | 'up' = 'down';
   private isScrollPaused = false;
   private scrollSpeed = 1; // pixels per interval
-  private scrollIntervalMs = 30; // milliseconds between scroll steps
+  private scrollIntervalMs = 60; // milliseconds between scroll steps
 
   callStats: CallStats[] = [];
   sites: Site[] = [];
