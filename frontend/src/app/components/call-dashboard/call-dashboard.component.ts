@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { CallStats, Site } from '../../models/call-stats.model';
 import { CallStatsService } from '../../services/call-stats.service';
 
@@ -7,8 +7,16 @@ import { CallStatsService } from '../../services/call-stats.service';
   templateUrl: './call-dashboard.component.html',
   styleUrls: ['./call-dashboard.component.css']
 })
-export class CallDashboardComponent implements OnInit, OnDestroy {
+export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
+
   private refreshInterval: any;
+  private autoScrollInterval: any;
+  private scrollDirection: 'down' | 'up' = 'down';
+  private isScrollPaused = false;
+  private scrollSpeed = 1; // pixels per interval
+  private scrollIntervalMs = 30; // milliseconds between scroll steps
+
   callStats: CallStats[] = [];
   sites: Site[] = [];
   selectedSite: string = '';
@@ -39,6 +47,58 @@ export class CallDashboardComponent implements OnInit, OnDestroy {
     if (this.refreshInterval) {
       clearInterval(this.refreshInterval);
     }
+    this.stopAutoScroll();
+  }
+
+  ngAfterViewInit(): void {
+    // Start auto-scroll after a short delay to ensure content is rendered
+    setTimeout(() => this.startAutoScroll(), 1000);
+  }
+
+  startAutoScroll(): void {
+    if (this.autoScrollInterval) {
+      return; // Already running
+    }
+
+    this.autoScrollInterval = setInterval(() => {
+      if (this.isScrollPaused || !this.scrollContainer) {
+        return;
+      }
+
+      const container = this.scrollContainer.nativeElement;
+      const maxScroll = container.scrollHeight - container.clientHeight;
+
+      if (maxScroll <= 0) {
+        return; // No scrolling needed
+      }
+
+      if (this.scrollDirection === 'down') {
+        container.scrollTop += this.scrollSpeed;
+        if (container.scrollTop >= maxScroll) {
+          this.scrollDirection = 'up';
+        }
+      } else {
+        container.scrollTop -= this.scrollSpeed;
+        if (container.scrollTop <= 0) {
+          this.scrollDirection = 'down';
+        }
+      }
+    }, this.scrollIntervalMs);
+  }
+
+  stopAutoScroll(): void {
+    if (this.autoScrollInterval) {
+      clearInterval(this.autoScrollInterval);
+      this.autoScrollInterval = null;
+    }
+  }
+
+  pauseScroll(): void {
+    this.isScrollPaused = true;
+  }
+
+  resumeScroll(): void {
+    this.isScrollPaused = false;
   }
 
   loadSites(): void {

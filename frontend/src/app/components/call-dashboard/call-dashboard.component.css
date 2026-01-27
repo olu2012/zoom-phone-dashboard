@@ -139,8 +139,30 @@
 
 .table-container {
   overflow-x: auto;
+  overflow-y: auto;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   border-radius: 8px;
+  max-height: calc(100vh - 180px);
+  scroll-behavior: auto;
+}
+
+/* Hide scrollbar but keep functionality */
+.table-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .call-stats-table {
@@ -162,6 +184,18 @@
   text-align: left;
   font-weight: 600;
   font-size: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Ensure sticky header has background color */
+.theme-roc .table-header th {
+  background-color: #e94d1e;
+}
+
+.theme-tank .table-header th {
+  background-color: #b5d282;
 }
 
 .call-stats-table tbody tr {

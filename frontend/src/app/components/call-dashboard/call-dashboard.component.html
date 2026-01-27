@@ -35,7 +35,9 @@
     </div>
   </div>
 
-  <div class="table-container">
+  <div class="table-container" #scrollContainer
+       (mouseenter)="pauseScroll()"
+       (mouseleave)="resumeScroll()">
     <table class="call-stats-table">
       <thead>
         <tr class="table-header">
