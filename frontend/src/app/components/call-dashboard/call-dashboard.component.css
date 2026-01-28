@@ -17,6 +17,12 @@
   margin: 0;
 }
 
+.header-logo {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
 .controls {
   display: flex;
   gap: 10px;

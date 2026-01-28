@@ -1,6 +1,7 @@
 <div class="dashboard-container" [class.theme-tank]="currentTheme === 'tank'" [class.theme-roc]="currentTheme === 'roc'">
   <div class="header">
-    <h1>Call Time Dashboard</h1>
+    <img *ngIf="currentTheme === 'roc'" src="assets/logos/roclogo.png" alt="ROC Logo" class="header-logo">
+    <img *ngIf="currentTheme === 'tank'" src="assets/logos/tanklogo.png" alt="Tank Logo" class="header-logo">
     <div class="controls">
       <!-- Date Range Selector -->
        <!--Date removed
