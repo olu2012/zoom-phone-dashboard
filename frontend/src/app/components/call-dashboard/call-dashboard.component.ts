@@ -30,6 +30,7 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
 
   // Configurable list of names to hide from the dashboard
   hiddenNames: string[] = [
+    // Main lines and queues
     'Austin Main Line',
     'Germany Main Line',
     'London Main Line',
@@ -52,7 +53,28 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
     'Test - Bullhorn App Call Queue 2',
     'Test - Bullhorn App Call Queue 3',
     'Test - Bullhorn App Call Queue 4',
-    'USA Sales Support'
+    'USA Sales Support',
+    // Excluded users
+    'Hayley James',
+    'Hannah Pickering',
+    'Patricia Cowie',
+    'John Palmer-Smith',
+    'Lily Thompson',
+    'Tori Foley',
+    'Oliver Lawrence',
+    'Alison Lee',
+    'Fiona Conroy',
+    'Louise Winship',
+    'Conor Roughneen',
+    'Michael RocAgent',
+    'Zoom Service Account',
+    'Sasha Ellis',
+    'Nathan Fenton',
+    'Josh Chamberlain',
+    'Gabs Diaz',
+    'Charlotte Bowern-Fashola',
+    "Caitlin O'Neill",
+    'Trevor Doran'
   ];
 
   // Getter to filter out hidden names from callStats
