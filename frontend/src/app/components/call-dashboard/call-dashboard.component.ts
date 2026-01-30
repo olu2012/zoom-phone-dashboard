@@ -26,6 +26,39 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
   dateRange: { from: string; to: string } | null = null;
   currentSite: string = 'All Sites';
   currentTheme: 'roc' | 'tank' = 'roc';
+  lastRefreshedTime: string | null = null; // 1. Add this property
+
+  // Configurable list of names to hide from the dashboard
+  hiddenNames: string[] = [
+    'Austin Main Line',
+    'Germany Main Line',
+    'London Main Line',
+    'Luke Coggins Dedicated Line',
+    'Manchester Main Line',
+    'Ntwrx RDG Main Line',
+    'NY Main Line',
+    'OLS LA Main Line',
+    'Reading Back Office Main Line',
+    'Reading Engineering Main Line',
+    'Reading IR Main Line',
+    'Reading Tech Main Line',
+    'Red King Sales Support',
+    'San Diego Main Line',
+    'Tank Main Line',
+    'Tank Sales Support',
+    'Tech Support',
+    'Test',
+    'Test - Bullhorn App Call Queue',
+    'Test - Bullhorn App Call Queue 2',
+    'Test - Bullhorn App Call Queue 3',
+    'Test - Bullhorn App Call Queue 4',
+    'USA Sales Support'
+  ];
+
+  // Getter to filter out hidden names from callStats
+  get filteredCallStats(): CallStats[] {
+    return this.callStats.filter(stat => !this.hiddenNames.includes(stat.user));
+  }
 
   constructor(private callStatsService: CallStatsService) {
     console.log('CallDashboardComponent initialized');
@@ -36,11 +69,11 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
     this.loadSites();
     this.loadCallStats();
 
-    // Auto-refresh every 5 minutes (300,000 ms)
+    // Auto-refresh every 3 minutes (180,000 ms)
     this.refreshInterval = setInterval(() => {
       console.log('Auto-refreshing data...');
       this.refresh();
-    }, 300000);
+    }, 180000);
   }
 
   ngOnDestroy(): void {
@@ -140,6 +173,13 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
         
         this.callStats = response.data;
         this.dateRange = response.dateRange;
+        // 2. Set the current time when data is received
+      const now = new Date();
+      this.lastRefreshedTime = now.toLocaleTimeString([], { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        second: '2-digit' 
+      });
         this.currentSite = response.site || 'All Sites';
         
         // Determine theme based on selected site

@@ -30,6 +30,7 @@
   <div class="info-bar">
     <div *ngIf="dateRange" class="date-range">
       📅 {{ dateRange.from }} to {{ dateRange.to }}
+      (Refreshed: {{ lastRefreshedTime }})
     </div>
     <div class="site-info">
       📍 {{ currentSite }}
@@ -53,10 +54,10 @@
         <tr *ngIf="loading">
           <td colspan="5" class="loading-cell">Loading call statistics...</td>
         </tr>
-        <tr *ngIf="!loading && callStats.length === 0">
+        <tr *ngIf="!loading && filteredCallStats.length === 0">
           <td colspan="5" class="no-data-cell">No call data available</td>
         </tr>
-        <tr *ngFor="let stat of callStats" 
+        <tr *ngFor="let stat of filteredCallStats" 
             [class.three-hours-reached]="hasReachedThreeHours(stat.totalOutboundCallTimeSeconds)">
           <td class="user-cell">{{ stat.user }}</td>
           <td>{{ stat.totalCalls }}</td>
