@@ -17,6 +17,12 @@
   margin: 0;
 }
 
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .header-logo {
   height: 60px;
   width: auto;

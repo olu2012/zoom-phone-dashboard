@@ -310,4 +310,29 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
   getThemeColorHover(): string {
     return this.currentTheme === 'tank' ? '#a5c272' : '#d43d0e';
   }
+
+  // Get logos to display based on selected site
+  get displayLogos(): { src: string; alt: string }[] {
+    switch (this.selectedSite) {
+      case 'Tank':
+        return [{ src: 'assets/logos/tanklogo.png', alt: 'Tank Logo' }];
+      case 'Reading':
+        return [
+          { src: 'assets/logos/roclogo.png', alt: 'ROC Logo' },
+          { src: 'assets/logos/ntwrxlogo.png', alt: 'NTWRX Logo' }
+        ];
+      case 'San Diego':
+        return [
+          { src: 'assets/logos/roclogo.png', alt: 'ROC Logo' },
+          { src: 'assets/logos/olslogo.png', alt: 'OLS Logo' }
+        ];
+      default: // All Sites
+        return [
+          { src: 'assets/logos/roclogo.png', alt: 'ROC Logo' },
+          { src: 'assets/logos/tanklogo.png', alt: 'Tank Logo' },
+          { src: 'assets/logos/ntwrxlogo.png', alt: 'NTWRX Logo' },
+          { src: 'assets/logos/olslogo.png', alt: 'OLS Logo' }
+        ];
+    }
+  }
 }
