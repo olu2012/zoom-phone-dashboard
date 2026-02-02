@@ -23,10 +23,18 @@
   gap: 15px;
 }
 
+.header-logos.multiple-logos {
+  gap: 30px;
+}
+
 .header-logo {
   height: 60px;
   width: auto;
   object-fit: contain;
+}
+
+.multiple-logos .header-logo {
+  height: 40px;
 }
 
 .controls {
