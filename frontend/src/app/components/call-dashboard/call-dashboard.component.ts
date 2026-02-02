@@ -314,8 +314,11 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
   // Get logos to display based on selected site
   get displayLogos(): { src: string; alt: string }[] {
     switch (this.selectedSite) {
-      case 'Tank':
-        return [{ src: 'assets/logos/tanklogo.png', alt: 'Tank Logo' }];
+      case 'Austin':
+      case 'Frankfurt':
+      case 'Manchester':
+      case 'New York':
+        return [{ src: 'assets/logos/roclogo.png', alt: 'ROC Logo' }];
       case 'Reading':
         return [
           { src: 'assets/logos/roclogo.png', alt: 'ROC Logo' },
@@ -326,6 +329,8 @@ export class CallDashboardComponent implements OnInit, OnDestroy, AfterViewInit 
           { src: 'assets/logos/roclogo.png', alt: 'ROC Logo' },
           { src: 'assets/logos/olslogo.png', alt: 'OLS Logo' }
         ];
+      case 'Tank':
+        return [{ src: 'assets/logos/tanklogo.png', alt: 'Tank Logo' }];
       default: // All Sites
         return [
           { src: 'assets/logos/roclogo.png', alt: 'ROC Logo' },
